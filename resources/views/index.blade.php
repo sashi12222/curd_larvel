@@ -24,15 +24,26 @@
                  <th>Action</th>
                
                 </tr>
-                @foreach ($students as $student)
+                @foreach ($students as $i => $student)
                 <tr>
-                  <td>{{ $student->id }}</td>
+                  <td>{{ ++$i }}</td>
                   <td>{{ $student->name }}</td>
                   <td>{{ $student->address }}</td>
                   <td>{{ $student->mobile }}</td>
                   <td>{{ $student->school }}</td>
                   <td>{{ $student->refer }}</td>
-                   <td><a href=""class="badge bg-info">Edit</a></td>     
+                   <td>
+                    <form action="/student/{{ $student->id }}" method="post">
+                      @method('delete')
+                      @csrf
+                      <a href="/student/{{ $student->id }}/edit"class="badge bg-info">Edit</a>
+                      <a href="/student/{{ $student->id }}"class="badge bg-success">Show</a>
+                      <button type="submit" class="btn badge bg-danger">delete</button>
+                    </form>
+                   
+                  
+                  </td>     
+                  
                 </tr>
                     
                 @endforeach

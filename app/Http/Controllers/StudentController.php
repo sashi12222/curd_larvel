@@ -46,7 +46,8 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $student=Student::find($id);   
+        return view('show',compact('student'));
     }
 
     /**
@@ -55,6 +56,8 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         //
+           $student=Student::find($id);
+           return view('edit',compact('student'));
     }
 
     /**
@@ -62,7 +65,14 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student= Student::find($id);
+        $student->name=$request->name;
+        $student->address=$request->address;
+        $student->mobile=$request->mobile;
+        $student->school=$request->school;
+        $student->refer=$request->refer;
+        $student->update();
+        return redirect()->back();
     }
 
     /**
@@ -71,5 +81,8 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
+        $student=Student::find($id);
+        $student->delete();
+        return redirect('/');
     }
 }
